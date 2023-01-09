@@ -5,4 +5,4 @@ read commitMessage
 
 git commit -m "$commitMessage"
 pass = gpg -dq /home/matrix/.secret.gpg
-echo pass
+echo 'pass' pass
