@@ -6,3 +6,4 @@ read commitMessage
 git commit -m "$commitMessage"
 pass=$(sudo  gpg -dq /home/matrix/.secret.gpg)
 echo 'pass' $pass
+git push origin main
