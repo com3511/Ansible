@@ -1,19 +1,13 @@
 - hosts: all
   become: true
   tasks:
-  - name: update repository
+  - name: install php and appche and pdate repo
     apt:
-      update_cache: yes
-    when: ansible_distribution in ["CentOS", "Ubuntu"]
-  - name: install apache2 package
-    apt:
+      update_cache: no
       name: apache2
-      state: latest
-    when:
-      - ansible_distribution == "Ubuntu" 
-      - ansible_distribution_version== "22.04" 
-  - name: install php
-    apt:
       name: libapache2-mod-php
       state: latest
-    when: ansible_distribution == "CentOS"
+    when: 
+      - ansible_distribution in ["CentOS", "Ubuntu"]
+      - ansible_distribution_version== "22.04"
+
