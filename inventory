@@ -1,2 +1,6 @@
 192.168.11.90
 
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
+apache=apache2
+

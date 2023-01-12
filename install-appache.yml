@@ -4,10 +4,14 @@
   - name: install php and appche and pdate repo
     apt:
       update_cache: no
-      name: apache2
+      name: apache
       name: libapache2-mod-php
       state: latest
     when: 
       - ansible_distribution in ["CentOS", "Ubuntu"]
       - ansible_distribution_version== "22.04"
-
+  handlers:
+    - name: service rest
+      ansible.builtin.service:
+        name: httpd
+        state: restarted
