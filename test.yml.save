@@ -1,0 +1,12 @@
+- name: test
+  hosts: windows
+  tasks:
+    - name: download 7zip 
+      win_get_url:
+         url: https://www.7-zip.org/a/7z1701-x64.msi
+         dest: c:\temp\7z.msi
+    - name: check if installed
+      win_package:
+        path: c:\temp\7z.msi
+        state: present
+

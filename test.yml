@@ -1,0 +1,7 @@
+- name: test
+  hosts: windows
+  tasks:
+    - name: run netstat and return Ethernet stats 
+      win_command: help
+      register: netstat
+    - debug: var=netstat
