@@ -1,0 +1,36 @@
+- name: Deploy new VM to vCenter
+  hosts: localhost
+  gather_facts: false
+  pre_tasks:
+    - include_vars: vmware.yml
+  tasks:
+  - name: Create VM 
+    retries: 3
+    delay: 10
+    vmware_guest:
+      hostname: "{{ vcenter_host }}"
+      username: "{{ vcenter_user }}"
+      password: "{{ vcenter_password }}"
+      validate_certs: no
+      datacenter: "{{ datacenter }}"
+      cluster: "{{ cluster }}"
+      name: "{{ vm_name }}"
+      state: poweredon
+      folder: "Discovered virtual machine"
+      guest_id: ubuntu64Guest
+      template: "ubuntutemp"
+      disk:
+      - size_gb: 30
+        type: thin
+        datastore: "{{ datastore }}"
+      networks:
+        - name: "{{ network }}"
+          ip: "192.168.11.91"
+          netmask: "{{ netmask }}"
+          gateway: "{{ gateway }}"
+          dns_servers: "{{ dns }}"
+          connected: true
+  - name: Wait for IP address
+    wait_for:
+      host: "{{ ip }}"
+      
